@@ -1,8 +1,8 @@
-package main
+package algebra
 
 // Integer Power ==================================================================================
 
-func pow(a, n int64) int64 {
+func Pow(a, n int64) int64 {
 	var ret, MOD int64 = 1, 1000000007
 	for n > 0 {
 		if n&1 != 0 {
@@ -21,7 +21,7 @@ const ORDER int = 8
 
 type Matrix [ORDER][ORDER]uint64
 
-func mul(a, b *Matrix) *Matrix {
+func Matmul(a, b *Matrix) *Matrix {
 	z := &Matrix{}
 	for i := 0; i < ORDER; i++ {
 		for j := 0; j < ORDER; j++ {
@@ -33,7 +33,7 @@ func mul(a, b *Matrix) *Matrix {
 	return z
 }
 
-func getIdentity() *Matrix {
+func GetIdentity() *Matrix {
 	ret := &Matrix{}
 	for i := 0; i < ORDER; i++ {
 		ret[i][i] = 1
@@ -41,13 +41,13 @@ func getIdentity() *Matrix {
 	return ret
 }
 
-func matpow(a *Matrix, n uint64) *Matrix {
-	ret := getIdentity()
+func Matpow(a *Matrix, n uint64) *Matrix {
+	ret := GetIdentity()
 	for n > 0 {
 		if n&1 != 0 {
-			ret = mul(ret, a)
+			ret = Matmul(ret, a)
 		}
-		a = mul(a, a)
+		a = Matmul(a, a)
 		n /= 2
 	}
 	return ret
