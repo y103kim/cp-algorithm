@@ -2,8 +2,10 @@ package algebra
 
 // Integer Power ==================================================================================
 
+var MOD int64 = 1000000007
+
 func Pow(a, n int64) int64 {
-	var ret, MOD int64 = 1, 1000000007
+	var ret int64 = 1
 	for n > 0 {
 		if n&1 != 0 {
 			ret = (ret * a) % MOD
@@ -14,12 +16,15 @@ func Pow(a, n int64) int64 {
 	return ret
 }
 
+func Inverse(a int64) int64 {
+	return Pow(a, MOD-2)
+}
+
 // Matrix Power ==================================================================================
 
-const MOD uint64 = 1000000007
 const ORDER int = 8
 
-type Matrix [ORDER][ORDER]uint64
+type Matrix [ORDER][ORDER]int64
 
 func Matmul(a, b *Matrix) *Matrix {
 	z := &Matrix{}
