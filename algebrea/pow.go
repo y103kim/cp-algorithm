@@ -2,9 +2,7 @@ package algebra
 
 // Integer Power ==================================================================================
 
-var MOD int64 = 1000000007
-
-func Pow(a, n int64) int64 {
+func Pow(a, n, MOD int64) int64 {
 	var ret int64 = 1
 	for n > 0 {
 		if n&1 != 0 {
@@ -16,13 +14,27 @@ func Pow(a, n int64) int64 {
 	return ret
 }
 
-func Inverse(a int64) int64 {
-	return Pow(a, MOD-2)
+func Upow(a, n, MOD uint64) uint64 {
+	var ret uint64 = 1
+	for n > 0 {
+		if n&1 != 0 {
+			ret = (ret * a) % MOD
+		}
+		a = (a * a) % MOD
+		n /= 2
+	}
+	return ret
+}
+
+func Inverse(a, MOD int64) int64 {
+	return Pow(a, MOD-2, MOD)
 }
 
 // Matrix Power ==================================================================================
 
 const ORDER int = 8
+
+var MOD int64 = 1000000007
 
 type Matrix [ORDER][ORDER]int64
 
